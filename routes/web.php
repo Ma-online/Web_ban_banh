@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
- Route::get('index',[PageController::class,'getIndex']);
+ Route::get('index', [PageController::class,'getIndex'])->name('trang-chu');
  
- Route::get('loai-san-pham',[PageController::class,'getloaiSp']);
+ Route::get('loai-san-pham/{type}',[PageController::class,'getLoaiSp'])->name('loaisanpham');
+
+ Route::get('chi-tiet-san-pham/{id}',[PageController::class,'getChiTietSp'])->name('chitietsanpham');
+
+ Route::get('lien-he',[PageController::class,'getLienHe'])->name('lien-he');
+
+ Route::get('gioi-thieu',[PageController::class,'getGioiThieu'])->name('gioi-thieu');
+ Route::get('add-to-cart/{id}',[PageController::class,'getAddToCart'])->name('themgiohang');
