@@ -26,4 +26,7 @@ Route::get('/', function () {
  Route::get('lien-he',[PageController::class,'getLienHe'])->name('lien-he');
 
  Route::get('gioi-thieu',[PageController::class,'getGioiThieu'])->name('gioi-thieu');
+ 
  Route::get('add-to-cart/{id}',[PageController::class,'getAddToCart'])->name('themgiohang');
+
+ Route::get('del-cart/{id}',[PageController::class,'getDelItemCart'])->name('xoagiohang');

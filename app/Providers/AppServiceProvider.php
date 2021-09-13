@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductType;
 use Illuminate\Contracts\Session\Session;
@@ -35,10 +35,12 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('header',function($view){
             if(Session('cart')){
-                $oldCart = Session::get('cart');
+                $oldCart = session()->get('cart');
                 $cart = new Cart($oldCart);
-                $view->with(['cart'=>Session::get('cart'),
-                'product_cart'=>$cart->item,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
+                $view->with(['cart'=>session()->get('cart'),
+                'product_cart'=>$cart->items,
+                'totalPrice'=>$cart->totalPrice,
+                'totalQty'=>$cart->totalQty]);
             }  
            
         });

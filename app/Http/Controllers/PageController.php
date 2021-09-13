@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Slide;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -45,13 +44,26 @@ class PageController extends Controller
     }
 
     public function getAddToCart(Request $req , $id){
-        $product = Product::find('id');
-        $oldCart = Session('cart')?Session::get('cart'):null;
+        $product = Product::find($id);
+        $oldCart = session('cart')?session()->get('cart'):null;
+        // dd($oldCart);
+        // exit;
         $cart = new Cart($oldCart);
-        dd($cart);
-        exit;
         $cart-> add($product,$id);
-        $req -> Session()->put('cart',$cart);
+        $req -> session()->put('cart',$cart);
+        return redirect()->back();
+    }
+
+    public function getDelItemCart($id){
+        $oldCart = session()->has('cart')?session()->get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart -> removeItem($id);
+        if(count($cart->items) >0){
+            session()->put('cart',$cart);
+        }else{
+            session()->forget('cart');
+        }
+        
         return redirect()->back();
     }
 }
