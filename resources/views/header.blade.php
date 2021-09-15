@@ -30,8 +30,8 @@
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
-                    <form role="search" method="get" id="searchform" action="/">
-                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+                    <form role="search" method="get" id="searchform" action="{{route('timkiem')}}">
+                        <input type="text" value="" name="key" id="s" placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search" type="submit" id="searchsubmit"></button>
                     </form>
                 </div>
@@ -58,7 +58,7 @@
                                                 <div class="media-body">
                                                     <span class="cart-item-title">{{$product['item']['name']}}</span>
                                                         <span class="cart-item-amount">{{$product['qty']}}*<span>
-                                                             @if ($product['item']['promotion_price'] === 0)
+                                                             @if ($product['item']['promotion_price'] == 0)
                                                                 {{number_format($product['item']['unit_price'])}} 
                                                             @else 
                                                                 {{number_format($product['item']['promotion_price'])}}
@@ -99,10 +99,10 @@
             <nav class="main-menu">
                 <ul class="l-inline ov">
                     <li><a href="{{route('trang-chu')}}">Trang chủ</a></li>
-                    <li><a href="">Loại sản phẩm</a>
+                    <li><a >Loại sản phẩm</a>
                         <ul class="sub-menu">
                             @foreach ($loai_sp as $loai)
-                            <li><a href="{{route('loaisanpham',$loai->id)}}">Tên của {{$loai->name}} </a></li>
+                            <li><a href="{{route('loaisanpham',$loai->id)}}"> {{$loai->name}} </a></li>
                             @endforeach
                         </ul>
                     </li>

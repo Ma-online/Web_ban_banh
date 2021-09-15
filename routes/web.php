@@ -42,3 +42,5 @@ Route::get('/', function () {
  Route::post('dang-ky',[PageController::class,'postSignin'])->name('dangky');
 
 Route::get('dang-xuat',[PageController::class,'getLogout'])->name('dangxuat');
+
+Route::get('search',[PageController::class,'getSearch'])->name('timkiem');
