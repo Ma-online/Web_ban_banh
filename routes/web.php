@@ -30,3 +30,15 @@ Route::get('/', function () {
  Route::get('add-to-cart/{id}',[PageController::class,'getAddToCart'])->name('themgiohang');
 
  Route::get('del-cart/{id}',[PageController::class,'getDelItemCart'])->name('xoagiohang');
+
+ Route::post('dat-hang',[PageController::class,'postCheckout'])->name('dathang');
+
+ Route::get('dat-hang',[PageController::class,'getCheckout'])->name('dathang');
+
+ Route::get('dang-nhap',[PageController::class,'getLogin'])->name('dangnhap');
+ Route::post('dang-nhap',[PageController::class,'postLogin'])->name('dangnhap');
+
+ Route::get('dang-ky',[PageController::class,'getSignin'])->name('dangky');
+ Route::post('dang-ky',[PageController::class,'postSignin'])->name('dangky');
+
+Route::get('dang-xuat',[PageController::class,'getLogout'])->name('dangxuat');

@@ -9,9 +9,14 @@
             </div>
             <div class="pull-right auto-width-right">
                 <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                    {{-- <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li> --}}
+                    @if (Auth::check())
+                        <li><a href="{{route('trang-chu')}}">Chào Bạn {{Auth::user()->full_name}}</a></li>
+                        <li><a href="{{route('dangxuat')}}">Đăng xuất</a></li>
+                    @else
+                        <li><a href="{{route('dangky')}}">Đăng kí</a></li>
+                        <li><a href="{{route('dangnhap')}}">Đăng nhập</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -32,18 +37,18 @@
                 </div>
 
                 <div class="beta-comp">
-                    @if (Session()->has('cart'))
+                   
                         <div class="cart">
                             <div class="beta-select"><i class="fa fa-shopping-cart"></i>Giỏ hàng 
-                            (@if ( Session()->has('cart'))
-                                    {{Session('cart')->totalQty}}
-                            @else
-                               trống
-                            @endif)
-                                    
+                                (@if ( Session()->has('cart'))
+                                        {{Session('cart')->totalQty}}
+                                @else
+                                trống
+                                @endif)
                                 <i class="fa fa-chevron-down"></i></div>
+                            @if (Session()->has('cart')) 
                             <div class="beta-dropdown cart-body">
-                                
+                              
                                 @foreach ($product_cart as $product)
                                     
                                         <div class="cart-item">
@@ -52,13 +57,11 @@
                                                 <a class="pull-left" href="#"><img src="source/image/product/{{$product['item']['image']}}" alt=""></a>
                                                 <div class="media-body">
                                                     <span class="cart-item-title">{{$product['item']['name']}}</span>
-                                                
-                                                    <span class="cart-item-amount">{{$product['qty']}}*
-                                                        <span>
-                                                            @if ({{$product['item']['promotion_price']}} == 0)
-                                                                {{number_format($product['item']['unit_price'])}}
-                                                            @else
-                                                                {{$product['item']['promotion_price']}}
+                                                        <span class="cart-item-amount">{{$product['qty']}}*<span>
+                                                             @if ($product['item']['promotion_price'] === 0)
+                                                                {{number_format($product['item']['unit_price'])}} 
+                                                            @else 
+                                                                {{number_format($product['item']['promotion_price'])}}
                                                             @endif 
                                                         </span>
                                                     </span>
@@ -69,25 +72,21 @@
                                 
                             
                                 <div class="cart-caption">
-                                    <div class="cart-total text-right">Tổng tiền: 
-                                        <span class="cart-total-value">
-                                            @if ({{$product['item']['promotion_price']}} == 0)
-                                            {{number_format($product['item']['unit_price'])}}
-                                            @else
-                                                {{$product['item']['promotion_price']}}
-                                            @endif
+                                    <div class="cart-total text-right">Tổng tiền:
+                                         <span class="cart-total-value">
+                                            {{ number_format( $totalPrice)}}
                                         </span>
                                     </div>
                                     <div class="clearfix"></div>
 
                                     <div class="center">
                                         <div class="space10">&nbsp;</div>
-                                        <a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+                                        <a href="{{route('dathang')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div> <!-- .cart -->
-                    @endif
+                             @endif
                 </div>
             </div>
             <div class="clearfix"></div>
