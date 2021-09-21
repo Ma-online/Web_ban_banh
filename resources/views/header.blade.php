@@ -108,7 +108,9 @@
                     </li>
                     <li><a href="{{route('gioi-thieu')}}">Giới thiệu</a></li>
                     <li><a href="{{route('lien-he')}}">Liên hệ</a></li>
+                    <li><a href="{{route('phukien',$loai->id)}}"> Phụ kiện</a></li>
                 </ul>
+
                 <div class="clearfix"></div>
             </nav>
         </div> <!-- .container -->

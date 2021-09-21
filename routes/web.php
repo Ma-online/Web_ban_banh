@@ -44,3 +44,5 @@ Route::get('/', function () {
 Route::get('dang-xuat',[PageController::class,'getLogout'])->name('dangxuat');
 
 Route::get('search',[PageController::class,'getSearch'])->name('timkiem');
+
+Route::get('phu-kien/{id}',[PageController::class,'getDecoration'])->name('phukien');

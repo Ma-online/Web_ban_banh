@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Decoration;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Slide;
@@ -184,4 +185,12 @@ class PageController extends Controller
                           -> get();
         return view('Page.search',compact('product'));                
     }
+
+    public function getDecoration($id){
+        $loai = Decoration::all();
+        $phukien = Decoration::where('id',$id)->first();
+      
+        return view('Page.phukiensanpham',compact('loai','phukien'));
+    }
+
 }
